@@ -1,0 +1,86 @@
+﻿@using WebApplication2.Entities﻿;
+@model Doctor;
+@{
+    var create = ViewBag.CreateMode;
+}
+<h1>@(create ? "Create" : "Edit") Create Doctors Form</h1>
+<div asp-validation-summary=All></div>
+
+<form class="row g-3 needs-validation" novalidate asp-action="@(create ? "Create" : "Edit")">
+    <div class="col-md-4 position-relative">
+        <label asp-for=FirstName class="form-label">First name</label>
+        <input asp-for=FirstName type="text" class="form-control" placeholder="Enter First name " required>
+        <div class="valid-tooltip">
+            Looks good!
+        </div>
+        <span class="small text-danger" asp-validation-for="FirstName"></span>
+    </div>
+    <div class="col-md-4 position-relative">
+        <label asp-for=LastName class="form-label">Last name</label>
+        <input asp-for=LastName type="text" class="form-control" placeholder="Enter Last name" required>
+        <div class="valid-tooltip">
+            Looks good!
+        </div>
+        <span class="small text-danger" asp-validation-for="LastName"></span>
+    </div>
+    <div class="col-md-4 position-relative">
+        <label asp-for=Name class="form-label">Doctor name</label>
+        <div class="input-group has-validation">
+            @*  <span class="input-group-text" id="validationTooltipUsernamePrepend"></span> *@
+            <input asp-for=Name type="text" class="form-control" placeholder="Doctor Name" required>
+            <div class="invalid-tooltip">
+                Please choose a unique and valid username.
+            </div>
+            <span class="small text-danger" asp-validation-for="Name"></span>
+        </div>
+    </div>
+    <div class="col-md-6 position-relative">
+
+        <label asp-for=Birthday class="form-label">Birthday</label>
+        <input asp-for=Birthday type="date" class="form-control" required>
+        <div class="invalid-tooltip">
+            Please provide a valid city.
+        </div>
+        <span class="small text-danger" asp-validation-for="Birthday"></span>
+
+    </div>
+    <div class="col-md-3 position-relative">
+        <label asp-for=CategoryId class="form-label">Category</label>
+        <select asp-for=CategoryId asp-items=@ViewBag.Categories class="form-select" required>
+            <option selected disabled value="">Choose...</option>
+
+        </select>
+        <div class="invalid-tooltip">
+            Please select a valid state.
+        </div>
+    </div>
+    <div class="col-md-3 position-relative">
+        <label asp-for=Work_experience class="form-label">Work_experience</label>
+        <input asp-for=Work_experience type="text" class="form-control" id="validationTooltip05" required>
+        <div class="invalid-tooltip">
+            Please provide a valid zip.
+        </div>
+        <span class="small text-danger" asp-validation-for="Work_experience"></span>
+
+    </div>
+    <div class="col-12">
+        <label asp-for=ImageUrl class="form-label">Image URL</label>
+        <input asp-for=ImageUrl required type="text" class="form-control" placeholder="Enter product image address">
+        <span class="small text-danger" asp-validation-for="Work_experience"></span>
+    </div>
+    <div class="col-md-6">
+        <a asp-action="Index" class="btn btn-dark w-100">
+            <i class="bi bi-arrow-left"></i>
+            Back
+        </a>
+    </div>
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-plus-lg"></i>
+             @(create ? "Create" : "Edit")
+        </button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

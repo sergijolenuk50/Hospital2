@@ -1,0 +1,64 @@
+﻿@using WebApplication2.Entities
+@model List<Doctor>;
+
+<h1>Contacts List</h1>
+<a asp-action="Create" class="btn btn-primary mb-2">
+    <i class="bi bi-plus-lg"></i>
+    Create a doctor's card
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Foto</th>
+            <th scope="col">FirstName</th>
+            <th scope="col">Name</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Birthday</th>
+            <th scope="col">Work_experience</th>
+            <th scope="col">Categori</th>
+            <th scope="col">Delite</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <th scope="row">@i.Id</th>
+                <td>
+                    <img height="50" src="@i.ImageUrl" alt="@i.Name" />
+
+                </td>
+                <td>
+                    @i.FirstName;
+                   
+                </td>
+                <td>
+                   @i.Name;</td>
+                <td>
+                    @i.LastName;
+                </td>
+                <td>@i.Birthday</td>
+                <td>@i.Work_experience</td>
+                <td>@i.Category?.Name</td>
+                <td>
+                    <a asp-controller="Doctors" asp-action="Edit" asp-route-id="@i.Id" class="btn btn-outline-danger">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a asp-controller="Doctors" asp-action="ArchiveItem" asp-route-id="@i.Id" class="btn btn-outline-warning">
+                        <i class="bi bi-archive-fill"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Count: @Model.Count</p>
+<div>
+    <a asp-action="Archive" class="btn btn-secondary">
+        <i class="bi bi-archive-fill"></i>
+        <span>Show Archived Items</span>
+    </a>
+</div>
